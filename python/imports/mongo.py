@@ -12,6 +12,3 @@ class Mongo():
         x = self.collection.insert_one(dict)
         str = 'Inserted to MongoDB: ', x.inserted_id
         print(str)
-        #self.logger.write_log('Inserted to MongoDB: ')
-        #self.logger.write_log(self.db_str)
-        #self.logger.write_log(x.inserted_id)

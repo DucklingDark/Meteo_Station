@@ -13,16 +13,25 @@ class Plotter():
         yMax = max(y)
         yMaxInd = y.index(yMax)
 
+        sValues = plotLabel + ' in ' + yLabel
+
         yMin = min(y)
         yMinInd = y.index(yMin)
 
-        sMin = 'Min value = ' + str(yMin) + '( ' + str(x[yMinInd]) + ' )'
-        sMax = 'Max value = ' + str(yMax) + '( ' + str(x[yMaxInd]) + ' )'
+        sMin = 'Min value = ' + str(yMin) + ' ' + yLabel + ' ( ' + str(x[yMinInd]) + ' )'
+        sMax = 'Max value = ' + str(yMax) + ' ' + yLabel + ' ( ' + str(x[yMaxInd]) + ' )'
+
+        avg = sum(y) / float(len(y))
+        xAvg = [x[0], x[len(x)-1]]
+        yAvg = [avg, avg]
+
+        sAvg = 'Average value = ' + str('{0:.2f}'.format(avg)) + ' ' + yLabel
 
         plt.plot([], [])
-        plt.scatter(x, y, c = 'r', label = 'Values')
+        plt.scatter(x, y, c = 'r', label = sValues)
         plt.scatter(x[yMinInd], yMin, c = 'lime', label = sMin)
         plt.scatter(x[yMaxInd], yMax, c = 'yellow', label = sMax)
+        plt.plot(xAvg, yAvg, c = 'magenta', label = sAvg)
 
         plt.gcf().autofmt_xdate()
         myFmt = mdates.DateFormatter('%Y_%m_%d_%H:%M:%S.%f')

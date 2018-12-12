@@ -49,8 +49,6 @@ class Protocol():
 		return msgs
 
 	def process_message(self, cmd, data):
-		#self.logger.write_log('Command: ' + str(cmd))
-		#self.logger.write_log('Message: ' + str(data))
 		date = datetime.now().strftime("%Y_%m_%d")
 		time = datetime.now().strftime("%H:%M:%S.%f")
 
@@ -71,7 +69,6 @@ class Protocol():
 				"date": date, "time": time}
 
 		self.mongo.write(dict)
-		#self.logger.write_log('Data: ' + msg)
 		tm = datetime.now().strftime("%H:%M:%S.%f")
 		print (msg)
 		print (tm)
