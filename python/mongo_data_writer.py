@@ -6,7 +6,7 @@ from imports.protocol import Protocol
 from imports.mongo import Mongo
 from imports.configer import Configer
 
-iniPath 		= 'configs\\config.ini'
+iniPath 		= '..\\configs\\config.ini'
 configer        = Configer(iniPath)
 mongo           = Mongo(configer.Settings.mongo.client, 
                         configer.Settings.mongo.db, 

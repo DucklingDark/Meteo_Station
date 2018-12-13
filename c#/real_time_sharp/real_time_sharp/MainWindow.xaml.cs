@@ -19,7 +19,7 @@ namespace real_time_sharp {
     public partial class MainWindow : Window {
         public MainWindow() {
             InitializeComponent();
-            string[] args = Environment.GetCommandLineArgs();
+
             string connectionString = "mongodb://localhost:27017";
             var client = new MongoClient(connectionString);
             var database = client.GetDatabase("meteo_station");

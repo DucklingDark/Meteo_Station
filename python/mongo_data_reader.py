@@ -10,7 +10,7 @@ from imports.plotter import Plotter
 from imports.args_parser import ArgsParser
 
 def main(argv):
-    iniPath         = 'configs\\config.ini'
+    iniPath         = '..\\configs\\config.ini'
     configer        = Configer(iniPath)
     plotter         = Plotter()
     mongo           = Mongo(configer.Settings.mongo.client, 

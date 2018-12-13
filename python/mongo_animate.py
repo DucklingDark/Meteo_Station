@@ -37,7 +37,7 @@ def main(argv):
         line.set_data(x, y)
         return line,
 
-    iniPath         = 'configs\\config.ini'
+    iniPath         = '..\\configs\\config.ini'
     configer        = Configer(iniPath)
     mongo           = Mongo(configer.Settings.mongo.client, 
                             configer.Settings.mongo.db, 
