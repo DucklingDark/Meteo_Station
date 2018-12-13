@@ -36,5 +36,6 @@ class Plotter():
         plt.gcf().autofmt_xdate()
         myFmt = mdates.DateFormatter('%Y_%m_%d_%H:%M:%S.%f')
         plt.gca().xaxis.set_major_formatter(myFmt)
+        plt.title(sValues)
         plt.legend()
         plt.show()
