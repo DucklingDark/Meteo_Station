@@ -7,9 +7,6 @@ using System.Threading.Tasks;
 using MongoDB.Bson;
 using MongoDB.Driver;
 
-using IniParser;
-using IniParser.Model;
-
 namespace real_time_sharp {
     public class SensorData {
         public ObjectId _id { get; set; }
@@ -20,19 +17,29 @@ namespace real_time_sharp {
     }
 
     class Mongo {
-        private FileIniDataParser parser;
+        private MongoClient client;
+        private IMongoDatabase database;
+        private IMongoCollection<SensorData> collection;
 
-        public void connect(string ini_Path) {
-            parser = new FileIniDataParser();
-            IniData data = parser.ReadFile("..\\..\\..\\python\\configs\\");
+        public Mongo() {
         }
 
-        //public SensorData read_sensor(string sensor) {
+        public void connect(string host, string db, string collect) {
+            client = new MongoClient(host);
+            database = client.GetDatabase(db);
+            collection = database.GetCollection<SensorData>(collect);
+        }
 
-        //}
+        public SensorData read_sensor(string sensor) {
+            var filter = Builders<SensorData>.Filter.Eq("sensor", sensor);
 
-        public void disconnect() {
+            var result = collection
+                        .Find(filter)
+                        .Limit(1)
+                        .Sort(Builders<SensorData>.Sort.Descending(x => x._id))
+                        .ToList();
 
+            return result[0];
         }
     }
 }

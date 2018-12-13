@@ -14,27 +14,29 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using MongoDB.Bson;
 using MongoDB.Driver;
+using System.Windows.Threading;
 
 namespace real_time_sharp {
     public partial class MainWindow : Window {
+        private Mongo mongo = new Mongo();
+        private DispatcherTimer timer;
+        private SensorData sens;
+        private int state;
+
         public MainWindow() {
             InitializeComponent();
 
-            string connectionString = "mongodb://localhost:27017";
-            var client = new MongoClient(connectionString);
-            var database = client.GetDatabase("meteo_station");
-            var collection = database.GetCollection<SensorData>("outside");
-            var filter = Builders<SensorData>.Filter.Eq("sensor", "BMP Pressure ");
+            state = 0;
 
-            var result = collection
-                        .Find(filter)
-                        .Limit(1)
-                        .Sort(Builders<SensorData>.Sort.Descending(x => x._id))
-                        .ToList();
+            timer = new DispatcherTimer();
+            timer.Tick += new EventHandler(timer_tick);
+            timer.Interval = new TimeSpan(250);
 
-            foreach (var rs in result) {
+            mongo.connect(host: "mongodb://localhost:27017",
+                          db: "meteo_station",
+                          collect: "outside");
 
-            }
+            timer.Start();
         }
 
         private void btn_Exit_Click(object sender, RoutedEventArgs e) {
@@ -44,6 +46,26 @@ namespace real_time_sharp {
         private void Window_MouseLeftButtonDown(object sender, MouseButtonEventArgs e) {
             base.OnMouseLeftButtonDown(e);
             this.DragMove();
+        }
+
+        private void timer_tick(object sender, EventArgs e) {
+            switch (state) {
+                case 0:
+                    sens = mongo.read_sensor("HTU Temperature ");
+                    lb_temp.Content = sens.data;
+                    state++;
+                    break;
+                case 1:
+                    sens = mongo.read_sensor("HTU Humiidity ");
+                    lb_humi.Content = sens.data;
+                    state++;
+                    break;
+                case 2:
+                    sens = mongo.read_sensor("BMP Pressure ");
+                    lb_atmo.Content = sens.data;
+                    state = 0;
+                    break;
+            }
         }
     }
 }
