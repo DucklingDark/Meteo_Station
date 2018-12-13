@@ -2,6 +2,7 @@ from pymongo import MongoClient
 
 class Mongo():
     def __init__(self, client, db, coll):
+        print('Mongo connected')
         self.client     = MongoClient(client)
         self.database   = self.client[db]
         self.collection = self.database[coll]

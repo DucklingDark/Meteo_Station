@@ -12,17 +12,17 @@ class ArgsParser():
             y_label = '°C'
             plot_label = 'Temperature (BMP180)'
         elif (arg == '-htu_temp'):
-            sensor = 'HTU Temperature '
+            sensor = 'HTU Temperature'
             y_label = '°C'
             plot_label = 'Temperature (HTU21D)'
         elif (arg == '-bmp_press'):
             sensor = 'BMP Pressure '
             y_label = 'mm Hg'
-            plot_label = 'Pressure'
+            plot_label = 'Pressure (BMP180)'
         elif (arg == '-htu_humi'):
             sensor = 'HTU Humiidity '
             y_label = '%'
-            plot_label = 'Humidity'
+            plot_label = 'Humidity (HTU21D)'
         else: 
             print('---Incorrect first parameter---')
             sensor = 'ERROR'
