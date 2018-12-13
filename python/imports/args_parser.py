@@ -12,7 +12,7 @@ class ArgsParser():
             y_label = '°C'
             plot_label = 'Temperature (BMP180)'
         elif (arg == '-htu_temp'):
-            sensor = 'HTU Temperature'
+            sensor = 'HTU Temperature '
             y_label = '°C'
             plot_label = 'Temperature (HTU21D)'
         elif (arg == '-bmp_press'):
