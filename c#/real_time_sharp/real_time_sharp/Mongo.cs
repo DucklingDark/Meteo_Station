@@ -39,6 +39,7 @@ namespace real_time_sharp {
                         .Sort(Builders<SensorData>.Sort.Descending(x => x._id))
                         .ToList();
 
+            result[0].data = result[0].data.Replace('.', ',');
             return result[0];
         }
     }
