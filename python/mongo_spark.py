@@ -9,7 +9,6 @@ import time
 import sys
 
 def main(argv):
-    start_time = int(round(time.time() * 1000))
     plotter    = Plotter()
 
     y = []
@@ -20,10 +19,10 @@ def main(argv):
                 .builder \
                 .appName("Meteo_Station") \
                 .config("spark.mongodb.input.uri", uri_conf) \
-                .config("spark.executor.memory", "2g") \
+                .config("spark.executor.memory", "4g") \
                 .config("spark.executor.number", "4") \
                 .config("spark.executor.cores", "4") \
-                .config("spark.network.timeout", "600s") \
+                .config("spark.network.timeout", "800s") \
                 .config('spark.yarn.executor.memoryOverhead', "4096m") \
                 .config("spark.driver.memoryOverhead",) \
                 .getOrCreate()
@@ -49,20 +48,7 @@ def main(argv):
 
     print('-->Data count\t: ' + str(len(x)))
 
-    plotter.show_plotter(x, y, plotLabel = '', yLabel = '')
-    #press_data = pressure.select('data').collect()
-    #data_array = [float(i.data) for i in pressure.collect()]
-
-    #press_time = pressure.select('time').collect()
-    #time_array = [i.time for i in pressure.collect()]
-
-    #press_date = pressure.select('date').collect()
-    #date_array = [i.date for i in pressure.collect()]
-    #print(len(coll))
-
-    end_time = int(round(time.time() * 1000))
-    total = end_time - start_time
-    print(total)
+    plotter.show_plotter(x, y, plotLabel = 'Pressure (BMP180)', yLabel = 'mm Hg')
 
 if (__name__ == '__main__'):
     main(sys.argv[1:])
