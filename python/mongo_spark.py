@@ -28,6 +28,7 @@ def main(argv):
                 .getOrCreate()
 
     df = spark.read.format("com.mongodb.spark.sql.DefaultSource").load()
+    df.printSchema()
     df.registerTempTable('temp')
     pressure = spark.sql('SELECT * FROM temp WHERE sensor = \'BMP Pressure \' ')
     coll = pressure.collect()

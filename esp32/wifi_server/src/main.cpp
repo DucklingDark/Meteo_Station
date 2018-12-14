@@ -12,10 +12,8 @@
 /***************************************************************************/
 #define HPA_TO_MM       0.750062
 /***************************************************************************/
-//const char* ssid        = "dev";
-//const char* password    = "BlizhnayaDacha11";
-const char* ssid        = "ASUS";
-const char* password    = "belayapanda";
+const char* ssid        = "***";
+const char* password    = "***";
 /***************************************************************************/
 Adafruit_BMP085_Unified bmp = Adafruit_BMP085_Unified(10085);
 HTU21D  myHTU21D(HTU21D_RES_RH11_TEMP11);

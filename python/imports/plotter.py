@@ -39,3 +39,4 @@ class Plotter():
         plt.title(sValues)
         plt.legend()
         plt.show()
+
